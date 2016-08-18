@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹幕</title>
+	<script src="./js/lib/jquery-1.10.2.min.js"></script>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		html,
+		body,
+		#container{
+			height:100%;
+			overflow:hidden;
+			width: 100%;
+		}
+		#btn{
+			height:34px;
+			line-height: 34px;
+			text-align: center;
+			border-radius: 6px;
+			padding:0 8px;
+			margin-left: 10px;
+			background-color: #4b73ec;
+			color:#fff;
+			border:1px solid #4b73ec;
+			cursor:pointer;
+		}
+		#btn:hover{
+			background-color: red;
+			border:1px solid red;
+		}
+		.title{
+			position:absolute;
+			right:-100px;
+			top:100px;
+			display: inline-block;
+			height: 18px;
+		}
+		footer{
+			position: fixed;
+			bottom:0;
+			width: 100%;
+			height:60px;
+			background-color:rgba(0,0,0,.4);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		input{
+			height: 30px;
+			border-radius: 6px;
+			outline: none;
+			border:1px solid #ddd;
+			padding:0 8px
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		
+	</div>
+	<footer>
+		<input type="text" placeholder="吐槽">
+		<button id="btn" onClick="content()" onmouseenter="enter(this)" onmouseleave="leave(this)">准备</button>
+	</footer>
+</body>
+
+<script>
+var h = $('html').height();
+var w = $('html').width() + 200;
+function content(){
+	var content = $('input').val();
+		$('input').val('');
+	var $div = $('<div class="title">'+content+'</div>')
+	$('#container').append($div)
+	var rd = Math.random();
+		rd = rd * h;
+	$div.css('top',rd).stop().animate({
+		left:'-300px'
+	},10000,'linear',function(){
+		$(this).remove()
+	})
+}
+function enter(x){
+	x.innerHTML = '发射'
+}
+function leave(x){
+	x.innerHTML = '准备'
+}
+</script>
+</html>
